@@ -3,5 +3,5 @@
 Feature: Working with Home Page
 
   @test
-Scenario: Home Page opening check
-Given Home Page is open
+  Scenario: Home Page opening check
+    Given Home Page is open

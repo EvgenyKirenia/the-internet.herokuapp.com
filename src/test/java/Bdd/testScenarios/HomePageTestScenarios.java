@@ -1,33 +1,26 @@
 package Bdd.testScenarios;
 
+import Bdd.Hooks;
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import pageObject.projectData.ProjectData;
 import utils.ConfProperties;
 import utils.Log;
 
-import java.time.Duration;
-
-public class HomePageTestScenarios {
-    WebDriver dr;
+public class HomePageTestScenarios extends Hooks {
+    Hooks hooks = new Hooks();
+    ProjectData projectData = new ProjectData();
 
     @Given("Home Page is open")
     public void openHomePage() {
-
-            System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("DriverPath"));
-            dr = new ChromeDriver();
-            dr.manage().window().maximize();
-            dr.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-            Log.info("Driver was started");
-            dr.get(ConfProperties.getProperty("HomePageURL"));
-            Assertions.assertEquals(dr.getCurrentUrl(), ConfProperties.getProperty("HomePageURL"));
-            Log.info("Home Page is opened");
+        projectData.startDriver();
+        Assertions.assertEquals(projectData.dr.getCurrentUrl(), ConfProperties.getProperty("HomePageURL"));
+        Log.info("Home Page is opened");
     }
+
     @After
-    public void quitDriver(){
-        dr.quit();
-        Log.info("Driver quit");
+    public void quitDriver() {
+        projectData.quitDriver();
     }
 }
