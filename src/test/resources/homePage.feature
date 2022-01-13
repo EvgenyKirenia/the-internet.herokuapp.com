@@ -1,7 +1,7 @@
 # encoding: UTF-8
 @test
-Feature: q
+Feature: Working with Home Page
 
-@test
-Scenario: q
-When q
+  @test
+Scenario: Home Page opening check
+Given Home Page is open
