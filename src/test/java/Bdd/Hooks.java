@@ -1,5 +1,12 @@
 package Bdd;
 
-public class Hooks {
+import pageObject.projectData.ProjectData;
 
+public class Hooks {
+    private ProjectData projectData;
+
+//    @After
+//    public void quitDriver() {
+//        projectData.quitDriver();
+//    }
 }
