@@ -13,8 +13,8 @@ Feature: Working with Home page
 
   Scenario: Home page contains GitHub link
     Given Home Page is open
-    When Click on "Fork me on GitHub" link
-    Then  GitHub "saucelabs/the-internet" repository is open
+    When Click on 'Fork me on GitHub' link
+    Then  GitHub repository is open
 
 
   Scenario: Home page contains examples link

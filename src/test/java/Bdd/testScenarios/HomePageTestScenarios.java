@@ -1,29 +1,37 @@
 package Bdd.testScenarios;
 
 import io.cucumber.java.After;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObject.homePage.HomePageObject;
 import pageObject.projectData.ProjectData;
 import utils.ConfProperties;
-import utils.Log;
 
+import java.time.Duration;
 import java.util.List;
+
+import static pageObject.homePage.HomePageObject.getForkMeOnGitHubLink;
 
 public class HomePageTestScenarios {
 
     ProjectData projectData = new ProjectData();
+    @After
+    public void quitDriver() {
+        projectData.quitDriver();
+    }
 
     @Given("Home Page is open")
     public void openHomePage() {
         projectData.startDriver();
         Assertions.assertEquals(projectData.dr.getCurrentUrl(), ConfProperties.getProperty("HomePageURL"),
                 "Browser URL doesn't open");
-        Log.info("Home Page is opened");
     }
 
 
@@ -31,7 +39,7 @@ public class HomePageTestScenarios {
     public void welcomeMessageIsDisplayed() {
         Assertions.assertTrue(HomePageObject.getWelcomeLable().isDisplayed(),
                 "Welcome label is not displayed");
-        Log.info("Welcome label is displayed");
+
     }
 
 
@@ -39,25 +47,36 @@ public class HomePageTestScenarios {
     public void welcomeMessageIsDisplayedAndContainsText(String text) {
         Assertions.assertEquals(HomePageObject.getWelcomeLable().getText(), text,
                 "Welcome message text is not euqals 'Welcome to the-internet'");
-        Log.info("Welcome text is correct");
     }
 
 
-    @After
-    public void quitDriver() {
-        projectData.quitDriver();
-    }
+
 
     @Then("^Available Examples list contains links$")
     public void availableExamplesListContainsLinks(List<String> arg) {
         Assertions.assertEquals(HomePageObject.getExamplestList(), arg, "Collections not Equals");
-        Log.info("Available Examples list is correct");
     }
 
     @When("I am opening {string} page")
+//    @And("I am opening {string} page")
     public void iAmOpeningPage(String linkText) {
         WebElement examplesLink = projectData.dr.findElement(By.xpath("//a[contains(text(),'" + linkText + "')]"));
         examplesLink.click();
+
+    }
+
+    @When("Click on 'Fork me on GitHub' link")
+    public void clickOnLink() {
+
+        projectData.wait.until(ExpectedConditions.elementToBeClickable(getForkMeOnGitHubLink()));
+        getForkMeOnGitHubLink().click();
+
+    }
+
+    @Then("GitHub repository is open")
+    public void githubRepositoryIsOpen() {
+      String gitRepositoriesURL= ConfProperties.getProperty("GitRepositoriesURL");
+        Assertions.assertEquals(gitRepositoriesURL,projectData.dr.getCurrentUrl(),"Git repository doesn't open");
 
     }
 }

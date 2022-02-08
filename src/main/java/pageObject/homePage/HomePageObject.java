@@ -16,7 +16,7 @@ public class HomePageObject extends HelperData {
     @FindBy(xpath = "//h1[contains(text(),'Welcome to the-internet')]")
     private static WebElement welcomeLable;
 
-    @FindBy(xpath = "//body/div[2]/a[1]")
+    @FindBy(xpath = "//body/div[2]/a[1]/img[1]")
     private static WebElement forkMeOnGitHubLink;
 
     @FindBy(xpath = "//body[1]/div[2]/div[1]/ul[1]/li")
