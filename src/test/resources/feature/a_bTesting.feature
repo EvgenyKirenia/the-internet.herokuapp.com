@@ -7,7 +7,13 @@ Feature: Working with A/B Testing page
     When I am opening "A/B Testing" page
     Then AB Testing page has content
 
-  Scenario: A/B Testing content is correct
+  Scenario: A/B Testing page contains GitHub link
+    Given Home Page is open
+    When I am opening "A/B Testing" page
+    When Click on 'Fork me on GitHub' link
+    Then  GitHub repository is open
+
+  Scenario: A/B Testing content has title and text
     Given Home Page is open
     And I am opening "A/B Testing" page
     Then Content title get text "A/B Test Control" or "A/B Test Variation 1"
