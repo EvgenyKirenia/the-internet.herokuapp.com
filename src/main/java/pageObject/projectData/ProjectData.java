@@ -24,13 +24,14 @@ public class ProjectData {
     public void startDriver() {
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("DriverPath"));
         dr = new ChromeDriver();
+        dr.manage().deleteAllCookies();
         dr.manage().window().maximize();
         wait = new FluentWait<>(dr)
-                .withTimeout(Duration.ofSeconds(5))
-                .pollingEvery(Duration.ofSeconds(1))
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(10))
                 .ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
         dr.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-        dr.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        dr.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Log.info("Driver was started");
         dr.get(ConfProperties.getProperty("HomePageURL"));
         homePageObject = new HomePageObject(dr);

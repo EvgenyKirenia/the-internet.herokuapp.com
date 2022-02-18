@@ -1,7 +1,6 @@
 package Bdd.testScenarios;
 
 import io.cucumber.java.After;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,12 +8,10 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObject.homePage.HomePageObject;
 import pageObject.projectData.ProjectData;
 import utils.ConfProperties;
 
-import java.time.Duration;
 import java.util.List;
 
 import static pageObject.homePage.HomePageObject.getForkMeOnGitHubLink;
@@ -22,6 +19,7 @@ import static pageObject.homePage.HomePageObject.getForkMeOnGitHubLink;
 public class HomePageTestScenarios {
 
     ProjectData projectData = new ProjectData();
+
     @After
     public void quitDriver() {
         projectData.quitDriver();
@@ -50,8 +48,6 @@ public class HomePageTestScenarios {
     }
 
 
-
-
     @Then("^Available Examples list contains links$")
     public void availableExamplesListContainsLinks(List<String> arg) {
         Assertions.assertEquals(HomePageObject.getExamplestList(), arg, "Collections not Equals");
@@ -67,7 +63,6 @@ public class HomePageTestScenarios {
 
     @When("Click on 'Fork me on GitHub' link")
     public void clickOnLink() {
-
         projectData.wait.until(ExpectedConditions.elementToBeClickable(getForkMeOnGitHubLink()));
         getForkMeOnGitHubLink().click();
 
@@ -75,8 +70,8 @@ public class HomePageTestScenarios {
 
     @Then("GitHub repository is open")
     public void githubRepositoryIsOpen() {
-      String gitRepositoriesURL= ConfProperties.getProperty("GitRepositoriesURL");
-        Assertions.assertEquals(gitRepositoriesURL,projectData.dr.getCurrentUrl(),"Git repository doesn't open");
+        String gitRepositoriesURL = ConfProperties.getProperty("GitRepositoriesURL");
+        Assertions.assertEquals(gitRepositoriesURL, projectData.dr.getCurrentUrl(), "Git repository doesn't open");
 
     }
 }

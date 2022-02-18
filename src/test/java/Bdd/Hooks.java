@@ -10,14 +10,14 @@ public class Hooks {
     private ProjectData projectData;
 
     @Before
-    public void beforeTest(Scenario scenario){
-        Log.info("Start scenario- "+ scenario.getName()+"---");
+    public void beforeTest(Scenario scenario) {
+        Log.info("Start scenario- " + scenario.getName() + "---");
 
     }
 
     @After
     public void afterTest(Scenario scenario) {
-        Log.info("Scenario- "+ scenario.getName()+"--"+scenario.getStatus()+"---");
+        Log.info("Scenario- " + scenario.getName() + "--" + scenario.getStatus() + "---");
 
     }
 }
