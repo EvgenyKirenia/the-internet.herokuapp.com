@@ -11,7 +11,11 @@ Feature: Working with Home page
     Given Home Page is open
     Then Welcome message contains text "Welcome to the-internet"
 
-  Scenario: Home page contains GitHub link
+  Scenario: Home page page contains GitHub link
+    Given Home Page is open
+    Then 'Fork me on GitHub' link is displayed
+
+  Scenario: Go to GitHub repository
     Given Home Page is open
     When Click on 'Fork me on GitHub' link
     Then  GitHub repository is open

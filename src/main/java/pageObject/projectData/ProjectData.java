@@ -7,8 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import pageObject.abTesting.AB_TestingObject;
-import pageObject.homePage.HomePageObject;
+import pageObject.abTesting.AB_Testing;
+import pageObject.addRemoveElements.AddRemoveElements;
+import pageObject.homePage.HomePage;
 import utils.ConfProperties;
 import utils.Log;
 
@@ -18,8 +19,9 @@ public class ProjectData {
     public WebDriver dr;
     public Wait<WebDriver> wait;
     private JavascriptExecutor js;
-    private HomePageObject homePageObject;
-    private AB_TestingObject abTestingObject;
+    private HomePage homePageObject;
+    private AB_Testing abTestingObject;
+    private AddRemoveElements addRemoveElements;
 
     public void startDriver() {
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("DriverPath"));
@@ -34,8 +36,9 @@ public class ProjectData {
         dr.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Log.info("Driver was started");
         dr.get(ConfProperties.getProperty("HomePageURL"));
-        homePageObject = new HomePageObject(dr);
-        abTestingObject = new AB_TestingObject(dr);
+        homePageObject = new HomePage(dr);
+        abTestingObject = new AB_Testing(dr);
+        addRemoveElements =new AddRemoveElements(dr);
     }
 
     public void quitDriver() {
@@ -43,11 +46,15 @@ public class ProjectData {
         Log.info("Driver quit");
     }
 
-    public HomePageObject getHomePageObject() {
+    public HomePage getHomePageObject() {
         return homePageObject;
     }
 
-    public AB_TestingObject getAbTestingObject() {
+    public AB_Testing getAbTestingObject() {
         return abTestingObject;
+    }
+
+    public AddRemoveElements getAddRemoveElements() {
+        return addRemoveElements;
     }
 }

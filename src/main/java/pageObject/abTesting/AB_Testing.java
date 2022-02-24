@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObject.projectData.HelperData;
 
-public class AB_TestingObject extends HelperData {
-    public AB_TestingObject(WebDriver dr) {
+public class AB_Testing extends HelperData {
+    public AB_Testing(WebDriver dr) {
         super(dr);
     }
 

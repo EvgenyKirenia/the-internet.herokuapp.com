@@ -8,8 +8,8 @@ import pageObject.projectData.HelperData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePageObject extends HelperData {
-    public HomePageObject(WebDriver dr) {
+public class HomePage extends HelperData {
+    public HomePage(WebDriver dr) {
         super(dr);
     }
 

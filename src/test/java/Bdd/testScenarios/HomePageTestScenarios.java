@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pageObject.homePage.HomePageObject;
+import pageObject.homePage.HomePage;
 import pageObject.projectData.ProjectData;
 import utils.ConfProperties;
 
 import java.util.List;
 
-import static pageObject.homePage.HomePageObject.getForkMeOnGitHubLink;
+import static pageObject.homePage.HomePage.getForkMeOnGitHubLink;
 
 public class HomePageTestScenarios {
 
@@ -35,7 +35,7 @@ public class HomePageTestScenarios {
 
     @Then("Welcome message is displayed")
     public void welcomeMessageIsDisplayed() {
-        Assertions.assertTrue(HomePageObject.getWelcomeLable().isDisplayed(),
+        Assertions.assertTrue(HomePage.getWelcomeLable().isDisplayed(),
                 "Welcome label is not displayed");
 
     }
@@ -43,14 +43,14 @@ public class HomePageTestScenarios {
 
     @Then("Welcome message contains text {string}")
     public void welcomeMessageIsDisplayedAndContainsText(String text) {
-        Assertions.assertEquals(HomePageObject.getWelcomeLable().getText(), text,
+        Assertions.assertEquals(HomePage.getWelcomeLable().getText(), text,
                 "Welcome message text is not euqals 'Welcome to the-internet'");
     }
 
 
     @Then("^Available Examples list contains links$")
     public void availableExamplesListContainsLinks(List<String> arg) {
-        Assertions.assertEquals(HomePageObject.getExamplestList(), arg, "Collections not Equals");
+        Assertions.assertEquals(HomePage.getExamplestList(), arg, "Collections not Equals");
     }
 
     @When("I am opening {string} page")
@@ -73,5 +73,10 @@ public class HomePageTestScenarios {
         String gitRepositoriesURL = ConfProperties.getProperty("GitRepositoriesURL");
         Assertions.assertEquals(gitRepositoriesURL, projectData.dr.getCurrentUrl(), "Git repository doesn't open");
 
+    }
+
+    @Then("{string} link is displayed")
+    public void forkMeOnGitHubLinkIsDisplayed() {
+        Assertions.assertTrue(getForkMeOnGitHubLink().isDisplayed(), "'Fork me on GitHub' link does not displayed");
     }
 }
