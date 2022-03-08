@@ -16,7 +16,7 @@ import java.util.List;
 
 import static pageObject.homePage.HomePage.getForkMeOnGitHubLink;
 
-public class HomePageTestScenarios {
+public class HomePageSteps {
 
     ProjectData projectData = new ProjectData();
 
@@ -32,21 +32,17 @@ public class HomePageTestScenarios {
                 "Browser URL doesn't open");
     }
 
-
     @Then("Welcome message is displayed")
     public void welcomeMessageIsDisplayed() {
         Assertions.assertTrue(HomePage.getWelcomeLable().isDisplayed(),
                 "Welcome label is not displayed");
-
     }
-
 
     @Then("Welcome message contains text {string}")
     public void welcomeMessageIsDisplayedAndContainsText(String text) {
         Assertions.assertEquals(HomePage.getWelcomeLable().getText(), text,
                 "Welcome message text is not euqals 'Welcome to the-internet'");
     }
-
 
     @Then("^Available Examples list contains links$")
     public void availableExamplesListContainsLinks(List<String> arg) {
@@ -58,25 +54,24 @@ public class HomePageTestScenarios {
     public void iAmOpeningPage(String linkText) {
         WebElement examplesLink = projectData.dr.findElement(By.xpath("//a[contains(text(),'" + linkText + "')]"));
         examplesLink.click();
-
     }
 
     @When("Click on 'Fork me on GitHub' link")
     public void clickOnLink() {
         projectData.wait.until(ExpectedConditions.elementToBeClickable(getForkMeOnGitHubLink()));
         getForkMeOnGitHubLink().click();
-
     }
 
     @Then("GitHub repository is open")
     public void githubRepositoryIsOpen() {
         String gitRepositoriesURL = ConfProperties.getProperty("GitRepositoriesURL");
-        Assertions.assertEquals(gitRepositoriesURL, projectData.dr.getCurrentUrl(), "Git repository doesn't open");
-
+        Assertions.assertEquals(gitRepositoriesURL, projectData.dr.getCurrentUrl(),
+                "Git repository doesn't open");
     }
 
     @Then("{string} link is displayed")
     public void forkMeOnGitHubLinkIsDisplayed() {
-        Assertions.assertTrue(getForkMeOnGitHubLink().isDisplayed(), "'Fork me on GitHub' link does not displayed");
+        Assertions.assertTrue(getForkMeOnGitHubLink().isDisplayed(),
+                "'Fork me on GitHub' link does not displayed");
     }
 }

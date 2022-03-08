@@ -10,8 +10,7 @@ Feature: Working with A/B Testing page
   Scenario: A/B Testing page contains GitHub link
     Given Home Page is open
     When I am opening "A/B Testing" page
-    When Click on 'Fork me on GitHub' link
-    Then  GitHub repository is open
+    Then 'Fork me on GitHub' link is displayed
 
   Scenario: A/B Testing content has title and text
     Given Home Page is open

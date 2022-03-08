@@ -32,13 +32,13 @@ public class ProjectData {
                 .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofSeconds(10))
                 .ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
-        dr.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        dr.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
         dr.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Log.info("Driver was started");
         dr.get(ConfProperties.getProperty("HomePageURL"));
         homePageObject = new HomePage(dr);
         abTestingObject = new AB_Testing(dr);
-        addRemoveElements =new AddRemoveElements(dr);
+        addRemoveElements = new AddRemoveElements(dr);
     }
 
     public void quitDriver() {

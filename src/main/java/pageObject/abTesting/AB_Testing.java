@@ -26,6 +26,7 @@ public class AB_Testing extends HelperData {
     public static WebElement getTitleControl() {
         return titleControl;
     }
+
     public static WebElement getTitleVariant() {
         return titleVariant;
     }
